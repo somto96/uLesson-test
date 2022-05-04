@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* *{
+  margin: 0;
+	font-family: 'Mulish', sans-serif;
+} */
+/* Main Container */
+/* Video */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* .video {
+  width: 100vw;
+  height: 900px;
+  position: absolute;
+} */
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Controls */
+
+/* .controlsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
+  width: 100vw;
+  background-color: transparent;
+  /* margin-top: ; 
+  padding: 0 40px;
+  z-index: 20;
+} */
 
-.App-link {
-  color: #61dafb;
-}
+/* .controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding-top: 18rem;
+  margin: auto;
+} */
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* .controlsIcon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  margin-left: 10rem;
+  margin-right: 10rem;
+} */
+/* 
+.controlsIcon--small {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin-left: 10rem;
+  margin-right: 10rem;
+} */
+
+/* The time controls section */
+
+/* .timecontrols {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  bottom: 4rem;
+  margin-left: 10vw;
+} */
+
+
