@@ -15,6 +15,9 @@
 .video-wrapper {
 	background-image: url("./assets/images/video-bg.png"), linear-gradient(rgba(234, 112, 82, 0.4), rgba(234, 112, 82, 0.4));
 	background-blend-mode: overlay;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
 
 input[type="range"] {
