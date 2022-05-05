@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
+
 const useVideoPlayer = (videoElement) => {
-	// ...
 	const [playing, setPlaying] = useState(false);
 	const [progress, setProgress] = useState(0);
-	// const [speed, setSpeed] = useState(1);
-	// const [muted, setMuted] = useState(false);
 	const [videoTime, setVideoTime] = useState(0);
 	const [currentTime, setCurrentTime] = useState(0);
-	console.log("element", videoElement);
 
 	const togglePlay = () => {
 		setPlaying(!playing);
 		setVideoTime(videoElement?.current?.duration);
-		// console.log("it clicked", test)
 	};
 
 	useEffect(() => {
@@ -32,27 +28,11 @@ const useVideoPlayer = (videoElement) => {
 		setProgress(manualChange);
 	};
 
-	// const handleVideoSpeed = (event) => {
-	//   const speed = Number(event.target.value);
-	//   videoElement.current.playbackRate = speed;
-	//   setSpeed(speed);
-	// };
-
-	// const toggleMute = () => {
-	//   setMuted(!muted);
-	// };
-
-	// useEffect(() => {
-	//   muted
-	//     ? (videoElement.current.muted = true)
-	//     : (videoElement.current.muted = false);
-	// }, [muted, videoElement]);
-
 	const fastForward = () => {
 		videoElement.current.currentTime += 10;
 	};
 
-	const revert = () => {
+	const rewind = () => {
 		videoElement.current.currentTime -= 10;
 	};
 
@@ -66,7 +46,7 @@ const useVideoPlayer = (videoElement) => {
 		togglePlay,
 		handleOnTimeUpdate,
 		handleVideoProgress,
-		revert,
+		rewind,
 		fastForward,
 	};
 };

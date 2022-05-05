@@ -11,80 +11,60 @@ import { ReactComponent as VideoAbstractSvg } from "assets/svgs/videoAbstract.sv
 import { Button } from "views/reusables";
 import useWindowSize from "utils/hooks/useWindowSize";
 import useVideoPlayer from "utils/hooks/useVideoPlayer";
+import { Logger } from "utils/reusableFunctions";
 
 const WatchLesson = () => {
 	const navigate = useNavigate();
 	const { lessonId } = useParams();
 	const videoElement = useRef(null);
+
 	const {
 		playerState,
 		togglePlay,
 		handleOnTimeUpdate,
 		handleVideoProgress,
-		// handleVideoSpeed,
-		// toggleMute,
+		rewind,
+		fastForward,
 	} = useVideoPlayer(videoElement);
+
 	const {
 		state: { data, lessonTopic, subjectName },
 	} = useLocation();
-	const { width } = useWindowSize();
-	const isMobile = width <= 768;
-	const selectedVideo = () => {
-		return data?.find((x) => x?.id === Number(lessonId));
-	};
-	const memoizedSelectedVideo = useMemo(() => selectedVideo(), [data]);
 
-	console.log("selectedVideo", memoizedSelectedVideo);
-	console.log("currentTime", playerState);
+	const { width } = useWindowSize();
+
+	const isMobile = width <= 768;
+
+	const memoizedSelectedVideo = useMemo(
+		() => data?.find((x) => x?.id === Number(lessonId)),
+		[data, lessonId]
+	);
+
+	const handleNext = () => {
+		Logger("Show next video functionality")
+	}
+	console.log("Selected video", memoizedSelectedVideo);
+
 	if (isMobile) {
 		return (
-			<div className="p-5">
-				<div
-					className="cursor-pointer text-sm text-center relative"
-					onClick={() => navigate(`${APP_PATHS.SUBJECT_DETAILS}/${subjectName}`)}
-				>
-					<GoBackIcon className="h-4 absolute top-5 left-2" />
+			<div className="p-1">
+				<div className=" text-sm text-center z-1">
+					<GoBackIcon
+						className="h-4 absolute top-5 left-2 cursor-pointer"
+						onClick={() => navigate(`${APP_PATHS.SUBJECT_DETAILS}/${subjectName}`)}
+					/>
 				</div>
 				<div className="container relative z-1 space-y-4 py-5">
 					<div className="grid grid-cols-1 py-10">
 						<div className="space-y-8">
 							<div className="relative">
+								{/* If media_url isn't available please use the sample video (SampleVideo) */}
 								<video
 									controls
 									className="w-full rounded-2xl"
-									src={SampleVideo}
+									src={memoizedSelectedVideo?.media_url ?? SampleVideo}
+									// src={SampleVideo}
 								></video>
-								{/* <div className="flex items-center justify-center space-x-10 w-full z-20 absolute top-0 bottom-0 left-0 right-0 ">
-									<div className="cursor-pointer">
-										<img className="w-10 h-10" alt="" src={BackwardIcon} />
-									</div>
-									<div className="cursor-pointer" onClick={() => togglePlay("hello")}>
-										<img
-											className={clsx(
-												"w-20 h-20",
-												playerState?.isPlaying && "play-effects"
-											)}
-											alt=""
-											src={PlayIcon}
-										/>
-									</div>
-									<div className="cursor-pointer">
-										<img className="w-10 h-10" alt="" src={ForwardIcon} />
-									</div>
-								</div>
-
-								<div className="flex items-center absolute bottom-2 w-full space-x-5 p-3">
-									<p className="text-white flex-none">1:02</p>
-									<input
-										type="range"
-										min="0"
-										max="100"
-										className="h-1 z-30 flex-grow relative slider"
-										value={playerState.progress}
-										onChange={(e) => handleVideoProgress(e)}
-									/>
-									<p className="text-white flex-none">2:05</p>
-								</div> */}
 							</div>
 						</div>
 					</div>
@@ -106,24 +86,30 @@ const WatchLesson = () => {
 			<div className="absolute -top-1 right-0 z-0">
 				<VideoAbstractSvg />
 			</div>
-			<div
-				className="cursor-pointer text-sm text-center relative"
-				onClick={() => navigate(`${APP_PATHS.SUBJECT_DETAILS}/${subjectName}`)}
-			>
-				<GoBackIcon className="h-4 absolute top-14 left-2" />
+			<div className="text-sm text-center relative">
+				<GoBackIcon
+					className="h-4 absolute top-14 left-2 cursor-pointer"
+					onClick={() => navigate(`${APP_PATHS.SUBJECT_DETAILS}/${subjectName}`)}
+				/>
 			</div>
-			<div className="container relative z-1 space-y-4 py-5">
+			<div className="container z-1 relative  space-y-4 py-5">
 				<div className="grid grid-cols-1 py-10">
 					<div className="space-y-8">
-						<div className="relative">
+						<div className="relative rounded-xl h-auto video-wrapper">
+							{/* If media_url isn't available please use the sample video (SampleVideo) */}
 							<video
 								ref={videoElement}
 								onTimeUpdate={handleOnTimeUpdate}
-								className="w-full h-auto rounded-2xl"
-								src={SampleVideo}
+								className="w-full h-full rounded-2xl"
+								src={memoizedSelectedVideo?.media_url ?? SampleVideo}
+								// src={SampleVideo}
 							></video>
-							<div className={clsx("flex items-center justify-center space-x-10 w-full z-20 absolute top-0 bottom-0 left-0 right-0")}>
-								<div className="cursor-pointer">
+							<div
+								className={clsx(
+									"flex items-center justify-center space-x-10 w-full z-20 absolute top-0 bottom-0 left-0 right-0"
+								)}
+							>
+								<div className="cursor-pointer" onClick={() => rewind()}>
 									<img className="w-10 h-10" alt="" src={BackwardIcon} />
 								</div>
 								<div className="cursor-pointer" onClick={() => togglePlay()}>
@@ -136,12 +122,17 @@ const WatchLesson = () => {
 										src={PlayIcon}
 									/>
 								</div>
-								<div className="cursor-pointer">
+								<div className="cursor-pointer" onClick={() => fastForward()}>
 									<img className="w-10 h-10" alt="" src={ForwardIcon} />
 								</div>
 							</div>
-							<div className="flex items-center absolute bottom-2 w-full space-x-5 p-10">
-								<p className="text-white flex-none opacity-60">{Math.floor(playerState?.currentTime / 60) + ":" + ("0" + Math.floor(playerState?.currentTime % 60)).slice(-2)}</p>
+
+							<div className="flex items-center justify-center absolute bottom-2 w-full space-x-5 p-10">
+								<p className="text-white flex-none opacity-60">
+									{Math.floor(playerState?.currentTime / 60) +
+										":" +
+										("0" + Math.floor(playerState?.currentTime % 60)).slice(-2)}
+								</p>
 								<input
 									type="range"
 									min="0"
@@ -166,7 +157,7 @@ const WatchLesson = () => {
 					<div className="font-normal text-lg tracking-wide">
 						<p className="opacity-40">{lessonTopic}</p>
 					</div>
-					<Button text="Next" block />
+					<Button text="Next" onClick={handleNext} block />
 				</div>
 			</div>
 

@@ -5,11 +5,9 @@ import { useNavigate } from "react-router-dom";
 import dummyLessonImage from "assets/images/dummyLesson.png";
 
 const LessonsComponent = ({ lessonsData, topic, subject }) => {
-	console.log("test", lessonsData);
 	const navigate = useNavigate();
 	return (
 		<div className="grid md:grid-cols-5 grid-cols-2 gap-4 relative z-1 text-center">
-			{/* Test */}
 			{lessonsData?.map((el, index) => (
 				<div
 					className="bg-white flex flex-col items-center justify-center cursor-pointer p-5 rounded-xl space-y-2 whitespace-normal"

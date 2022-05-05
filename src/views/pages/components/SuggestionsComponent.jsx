@@ -18,12 +18,12 @@ const SuggestionsComponent = ({ data, mainText, btnText }) => {
 				<Button text={btnText} />
 			</div>
 			<div className="grid grid-col-1 md:grid-cols-4 gap-4">
-				{data?.map(({ id, name, data }) => (
+				{data?.map(({ id, name, chapters }) => (
 					<div key={id} className="space-y-2">
 						<div
 							className="w-full h-56 bg-center bg-cover rounded-xl relative"
 							style={{
-								backgroundImage: `url(${dummyImage})`,
+								backgroundImage: `url(${data?.icon ?? dummyImage})`,
 							}}
 						>
 							<div className="absolute flex items-center justify-center top-0 bottom-0 left-0 right-0">
@@ -46,7 +46,7 @@ const SuggestionsComponent = ({ data, mainText, btnText }) => {
 						<div
 							className="text-left text-lg font-bold"
 						>
-							<p>{data?.name}</p>
+							<p>{chapters?.name}</p>
 						</div>
 					</div>
 				))}

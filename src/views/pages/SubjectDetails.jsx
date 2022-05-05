@@ -19,22 +19,23 @@ const SubjectDetails = () => {
 		state: { allLessons },
 	} = useDataContext();
 
-	const filterSelectedSubject = () => {
-		const filteredSubject = allLessons?.find(
-			(video) => video?.name?.toLowerCase() === subject?.toLowerCase()
-		);
-		return setSelectedSubject(filteredSubject);
-	};
+	useEffect(() => {
+		if(!allLessons?.length){
+			getAllLessons();
+		}
+		
+	},[allLessons, getAllLessons]);
 
 	useEffect(() => {
-		getAllLessons();
-	}, []);
+		const filterSelectedSubject = () => {
+			const filteredSubject = allLessons?.find(
+				(video) => video?.name?.toLowerCase() === subject?.toLowerCase()
+			);
+			return setSelectedSubject(filteredSubject);
+		};
 
-	useEffect(() => {
 		filterSelectedSubject();
-	}, [allLessons]);
-
-	console.log("selectedSubject", selectedSubject);
+	}, [allLessons, subject]);
 
 	if (isMobile) {
 		return (
@@ -56,10 +57,15 @@ const SubjectDetails = () => {
 					<div className="grid grid-cols-1 gap-4 space-y-8 text-center">
 						{selectedSubject?.chapters?.map((data, index) => (
 							<div className="space-y-4" key={data?.id}>
+								s
 								<h1 className="font-normal text-2xl text-ulesson-navbg itim-font-style">
 									{`${index + 1}. ${data?.name}`}
 								</h1>
-								<LessonsComponent lessonsData={data?.lessons} topic={data?.name} />
+								<LessonsComponent
+									lessonsData={data?.lessons}
+									topic={data?.name}
+									subject={selectedSubject?.name}
+								/>
 							</div>
 						))}
 					</div>
@@ -92,7 +98,11 @@ const SubjectDetails = () => {
 								<h1 className="font-normal text-2xl text-ulesson-navbg itim-font-style">
 									{`${index + 1}. ${data?.name}`}
 								</h1>
-								<LessonsComponent lessonsData={data?.lessons} topic={data?.name} subject={subject} />
+								<LessonsComponent
+									lessonsData={data?.lessons}
+									topic={data?.name}
+									subject={subject}
+								/>
 							</div>
 						))}
 					</div>

@@ -15,15 +15,13 @@ const Home = () => {
 	const { width } = useWindowSize();
 	const {
 		getAllLessons,
-		state: { allLessons, suggestions },
+		state: { suggestions },
 	} = useDataContext();
 
 	useEffect(() => {
 		getAllLessons();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	allLessons && console.log("lessons", allLessons);
-	suggestions && console.log("suggestions", suggestions);
 
 	return (
 		<>

@@ -12,6 +12,28 @@
 	font-family: "Itim", cursive;
 }
 
+.video-wrapper {
+	background-image: url("./assets/images/video-bg.png"), linear-gradient(rgba(234, 112, 82, 0.4), rgba(234, 112, 82, 0.4));
+	background-blend-mode: overlay;
+}
+
+input[type="range"] {
+	background: #e5e5e5;
+}
+
+/* FIREFOX-ONLY
+	The -webkit version of these styles are no longer standard according to MDN
+ */
+input[type="range"]::-moz-range-thumb {
+	-webkit-appearance: none !important;
+	background-color: white;
+	opacity: 1;
+	cursor: pointer;
+}
+input[type="range"]::-moz-range-progress {
+	background: white;
+}
+
 .loading-dot:after {
 	content: " .";
 	-webkit-animation: dots 2s steps(5, end) infinite;
