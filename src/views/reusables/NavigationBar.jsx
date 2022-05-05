@@ -7,7 +7,7 @@ import Avatar from "assets/svgs/avatar.svg";
 const NavigationBar = () => {
 	const navigate = useNavigate();
 	return (
-		<div className="w-full bg-ulesson-navbg px-5 py-3 flex items-center justify-between sticky z-10">
+		<div className="w-full bg-ulesson-navbg px-5 py-3 flex items-center justify-between sticky top-0 z-20">
 			<div className="cursor-pointer" onClick={() => navigate(APP_PATHS.HOME)}>
 				<img className="w-auto h-5" alt="uLesson's Logo" src={Logo} />
 			</div>

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
 import { APP_PATHS } from "routes/constants";
-import { NavigationBar} from "views/reusables";
+import { NavigationBar } from "views/reusables";
 import SuggestionsComponent from "views/pages/components/SuggestionsComponent";
 import Hand from "assets/svgs/handFigure.svg";
 import BottomRightAbstract from "assets/svgs/beanBagFigure.svg";
@@ -15,7 +15,6 @@ const Home = () => {
 	const { width } = useWindowSize();
 	const {
 		getAllLessons,
-    selectedSuggestions,
 		state: { allLessons, suggestions },
 	} = useDataContext();
 
@@ -23,16 +22,12 @@ const Home = () => {
 		getAllLessons();
 	}, []);
 
-	useEffect(() => {
-		selectedSuggestions();
-	}, [allLessons]);
-
 	allLessons && console.log("lessons", allLessons);
-	allLessons && console.log("suggestions", suggestions);
-
+	suggestions && console.log("suggestions", suggestions);
 
 	return (
 		<>
+
 			<NavigationBar />
 
 			{width > 768 && (
@@ -48,12 +43,16 @@ const Home = () => {
 			)}
 
 			<div className="w-full container my-auto py-12 relative z-1 space-y-16">
-				<h1 className="font-normal text-4xl text-ulesson-navbg itim-font-style"> Hello Hassan, </h1>
+				<h1 className="font-normal text-4xl text-ulesson-navbg itim-font-style">
+					{" "}
+					Hello Hassan,{" "}
+				</h1>
 				<div className="grid md:grid-cols-5 grid-cols-2 text-white gap-4">
 					{requiredSubjectsList?.map(
 						({
 							id,
 							subject,
+							key,
 							isMath,
 							isPhy,
 							isBio,
@@ -64,7 +63,7 @@ const Home = () => {
 						}) => (
 							<div
 								key={id}
-								onClick={() => navigate(`${APP_PATHS.SUBJECT_DETAILS}/${id}`)}
+								onClick={() => navigate(`${APP_PATHS.SUBJECT_DETAILS}/${key}`)}
 								className={clsx(
 									isMath && "bg-ulesson-deep-orange",
 									isChem && "bg-ulesson-orange",
@@ -102,8 +101,16 @@ const Home = () => {
 						)
 					)}
 				</div>
-        <SuggestionsComponent mainText="Recently watched topics" btnText="See All" data={suggestions} />
-        <SuggestionsComponent mainText="Recommended Videos" btnText="See All" data={suggestions} />
+				<SuggestionsComponent
+					mainText="Recently watched topics"
+					btnText="See All"
+					data={suggestions}
+				/>
+				<SuggestionsComponent
+					mainText="Recommended Videos"
+					btnText="See All"
+					data={suggestions}
+				/>
 			</div>
 		</>
 	);

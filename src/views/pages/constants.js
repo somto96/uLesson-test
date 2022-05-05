@@ -15,6 +15,7 @@ export const requiredSubjectsList = [
     {
         id: 1,
         subject: "Mathematics",
+        key: "mathematics",
         isMath: true,
         symbol: MathsIcon,
         abstractSvg: MathsBlob,
@@ -22,6 +23,7 @@ export const requiredSubjectsList = [
     {
         id: 2,
         subject: "Physics",
+        key: "physics",
         isPhy: true,
         symbol: PhysicsIcon,
         abstractSvg: PhysicsBlob,
@@ -29,6 +31,7 @@ export const requiredSubjectsList = [
     {
         id: 3,
         subject: "Chemistry",
+        key: "chemistry",
         isChem: true,
         symbol: ChemistryIcon,
         abstractSvg: ChemistryBlob,
@@ -36,6 +39,7 @@ export const requiredSubjectsList = [
     {
         id: 4,
         subject: "Biology",
+        key: "biology",
         isBio: true,
         symbol: BiologyIcon,
         abstractSvg: BiologyBlob,
@@ -43,6 +47,7 @@ export const requiredSubjectsList = [
     {
         id: 5,
         subject: "English Language",
+        key: "english",
         isEng: true,
         symbol: EnglishIcon,
         abstractSvg: EnglishBlob,

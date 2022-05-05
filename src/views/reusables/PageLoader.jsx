@@ -14,7 +14,7 @@ const PageLoader = ({ message }) => {
 
   return (
     <div
-      className="absolute top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-95 p-5 z-20 overflow-hidden backdrop-filter backdrop-blur-lg"
+      className="absolute top-0 left-0 flex justify-center items-center w-full h-full bg-black bg-opacity-95 p-5 z-50 overflow-hidden backdrop-filter backdrop-blur-lg"
       style={{ margin: 0 }}
     >
       <center className="z-10">

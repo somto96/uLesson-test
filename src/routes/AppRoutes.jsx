@@ -16,10 +16,10 @@ const AppRoutes = () => {
 	return (
 		<ContextGroupProvider>
 			{!networkStatus && <PageLoader message="You are not connected to the internet. Waiting for a connection" />}
-			<div className="min-h-screen bg-ulesson-gray relative">
+			<div className="min-h-screen w-full bg-ulesson-gray relative">
 				<Routes>
 					<Route path={APP_PATHS.HOME} element={<Home />} />
-					<Route path={`${APP_PATHS.SUBJECT_DETAILS}/:subjectId`} element={<SubjectDetails />} />
+					<Route path={`${APP_PATHS.SUBJECT_DETAILS}/:subject`} element={<SubjectDetails />} />
 					<Route path={`${APP_PATHS.WATCH_LESSON}/:lessonId`} element={<WatchLesson />} />
 				</Routes>
 			</div>
